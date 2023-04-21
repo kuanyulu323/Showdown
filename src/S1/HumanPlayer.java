@@ -6,7 +6,7 @@ public class HumanPlayer extends Player {
     @Override
     public Card playCard() {
         System.out.println("你的手牌有：");
-        System.out.println(getHandCardsToString());
+        System.out.print(getHandCardsToString());
         System.out.print("你想出哪一張呢？");
         Scanner scanner = new Scanner(System.in);
         int index = scanner.nextInt();

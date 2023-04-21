@@ -24,7 +24,7 @@ public class Table {
                 maxScorePlayers = new ArrayList<>();
                 maxScorePlayers.add(maxScorePlayer);
             } else if (player.getScore() == maxScorePlayer.getScore()) {
-                maxScorePlayers.add(maxScorePlayer);
+                maxScorePlayers.add(player);
             }
         }
 
@@ -37,12 +37,12 @@ public class Table {
     private static void roundStage(List<Player> players) {
         for (int i = 1; i <= 13; i++) {
             Round round = new Round();
+            checkUseExchangeHands(players);
             for (Player player : players) {
-                checkUseExchangeHands(players, player);
+                System.out.println("輪到" + player.getName() + "出牌");
                 Card card = player.playCard();
                 round.getPlayerCardMap().put(player, card);
             }
-
             checkExchangeHandsRoundIsOver(players);
             showdownStage(players, round);
         }
@@ -83,26 +83,29 @@ public class Table {
         }
     }
 
-    private static void checkUseExchangeHands(List<Player> players, Player player) {
-        if (player instanceof HumanPlayer && player.getExchangeHands() == null) {
-            System.out.println("你要交換手牌嗎？ yes or no");
-            String yesOrNo = scanner.nextLine().toLowerCase();
-            while (!yesOrNo.equals("yes") && !yesOrNo.equals("no")) {
-                System.out.println("只能回答yes or no");
-                yesOrNo = scanner.nextLine().toLowerCase();
-            }
-            if (yesOrNo.equals("yes")) {
-                System.out.println("你要跟誰交換？");
-                for (Player player1 : players) {
-                    if (player1 == player) {
-                        continue;
-                    }
-                    System.out.println(player1.getName());
+    private static void checkUseExchangeHands(List<Player> players) {
+        for (Player player : players) {
+            if (player instanceof HumanPlayer && player.getExchangeHands() == null) {
+                System.out.print(player.getName() + ", 你要交換手牌嗎？");
+                System.out.print("yes or no：");
+                String yesOrNo = scanner.next();
+                while (!yesOrNo.equals("yes") && !yesOrNo.equals("no")) {
+                    yesOrNo = scanner.next().toLowerCase();
+                    System.out.print("只能回答yes or no：");
                 }
-                String targetPlayerName = scanner.nextLine();
-                while (!verifyName(players, player, targetPlayerName)) {
-                    System.out.println("名字輸入錯誤，請再輸入一次：");
-                    targetPlayerName = scanner.nextLine();
+                if (yesOrNo.equals("yes")) {
+                    System.out.println("你要跟誰交換？");
+                    for (Player player1 : players) {
+                        if (player1 == player) {
+                            continue;
+                        }
+                        System.out.println(player1.getName());
+                    }
+                    String targetPlayerName = scanner.next();
+                    while (!verifyName(players, player, targetPlayerName)) {
+                        System.out.println("名字輸入錯誤，請再輸入一次：");
+                        targetPlayerName = scanner.next();
+                    }
                 }
             }
         }
