@@ -24,8 +24,10 @@ public class Showdown {
                 System.out.println("AI命名為：" + aiPlayerName);
                 player.setName(aiPlayerName);
             } else {
+                String playerName = scanner.nextLine();
                 System.out.print("命名：");
-                player.setName(scanner.nextLine());
+                System.out.println("命名為：" + playerName);
+                player.setName(playerName);
             }
         }
     }
