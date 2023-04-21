@@ -4,13 +4,15 @@ import java.util.*;
 
 public class ExchangeHands {
 
-    private Player sourcePlayer;
+    private final Player sourcePlayer;
 
-    private Player targetPlayer;
+    private final Player targetPlayer;
 
     private int roundCount;
 
     public ExchangeHands(Player sourcePlayer, Player targetPlayer) {
+        this.sourcePlayer = sourcePlayer;
+        this.targetPlayer = targetPlayer;
         List<Card> tempCards = targetPlayer.getHandCards();
         targetPlayer.setHandCards(sourcePlayer.getHandCards());
         sourcePlayer.setHandCards(tempCards);

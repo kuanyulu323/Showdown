@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 public class Showdown {
 
-    private List<Player> players;
+    private final List<Player> players;
 
-    private Deck deck;
+    private final Deck deck;
 
     public Showdown(List<Player> players, Deck deck) {
         this.players = players;
@@ -24,16 +24,11 @@ public class Showdown {
                 System.out.println("AI命名為：" + aiPlayerName);
                 player.setName(aiPlayerName);
             } else {
+                System.out.print("命名為：");
                 String playerName = scanner.nextLine();
-                System.out.print("命名：");
-                System.out.println("命名為：" + playerName);
                 player.setName(playerName);
             }
         }
-    }
-
-    public List<Player> getPlayers() {
-        return players;
     }
 
     public Deck getDeck() {
