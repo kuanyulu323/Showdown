@@ -88,10 +88,10 @@ public class Table {
             if (player instanceof HumanPlayer && player.getExchangeHands() == null) {
                 System.out.print(player.getName() + ", 你要交換手牌嗎？");
                 System.out.print("yes or no：");
-                String yesOrNo = scanner.next();
+                String yesOrNo = scanner.next().toLowerCase();
                 while (!yesOrNo.equals("yes") && !yesOrNo.equals("no")) {
-                    yesOrNo = scanner.next().toLowerCase();
                     System.out.print("只能回答yes or no：");
+                    yesOrNo = scanner.next().toLowerCase();
                 }
                 if (yesOrNo.equals("yes")) {
                     System.out.println("你要跟誰交換？");
